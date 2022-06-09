@@ -59,6 +59,10 @@ const CustomButton = experimentalStyled("div")(
   padding: 0.4rem 0.5rem;
   border-radius: 8px;
 
+  & *{
+    margin: 0 5px;
+  }
+
 &:hover{
     border: none;
       background: #B0ACAC;
@@ -68,10 +72,15 @@ const CustomButton = experimentalStyled("div")(
   @media (max-width: ${theme.breakpoints.values.lg}px) {
     flex-direction: column;
     align-items: center;
-    // margin: 0 0.5rem;
   }
   @media (max-width: ${theme.breakpoints.values.md}px) {
-    margin: 0 0.5rem;
+
+    margin: 0;
+
+    & *{
+    margin: 0 ;
+
+    }
   }
   
 `
@@ -94,67 +103,30 @@ height: 22px;
 margin: 0 0.8rem;
 `
 );
+
 const Navbar = () => {
   return (
     <NavWrapper>
       <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Hidden mdDown>
+        {/* <Hidden mdDown>
           <Menu sx={{ height: "20px" }} />
+        </Hidden> */}
+        <Hidden xsDown>
+          <Typography
+            variant="h5"
+            sx={{
+              paddingLeft: "2rem",
+              letterSpacing: "0.5px",
+            }}
+          >
+            Rupak Magar
+          </Typography>
         </Hidden>
-        <Typography
-        variant="h5"
-          sx={{
-            paddingLeft: "2rem",
-            letterSpacing: "0.5px",
-          }}
-        >
-          Rupak Magar
-        </Typography>
       </Box>
       <MiddleBox>
-        {/* <Link to="/articles"> */}
-        <CustomButton>
-          <Link href="/home">
-            <a>
-              <Image
-                alt="me"
-                src="/assets/images/article.png"
-                height="20"
-                width="20"
-              />
-            </a>
-          </Link>
-          <Typography>Articles</Typography>
-        </CustomButton>
-
-        <CustomButton>
-          <Link href="/home">
-            <a>
-              <Image
-                alt="me"
-                src="/assets/images/project.png"
-                height="20"
-                width="20"
-              />
-            </a>
-          </Link>
-          <Typography>Projects</Typography>
-        </CustomButton>
-
-        <CustomButton>
-          <Link href="/home">
-            <a>
-              <Image
-                alt="me"
-                src="/assets/images/about_me.png"
-                height="20"
-                width="20"
-              />
-            </a>
-          </Link>
-          <Typography>About me</Typography>
-        </CustomButton>
-        {/* </Link> */}
+        <NavbarItem name="Articles" path="home" image="article" />
+        <NavbarItem name="Projects" path="home" image="project" />
+        <NavbarItem name="About me" path="home" image="about_me" />
       </MiddleBox>
       <MiddleBox>
         <Hidden smDown>
@@ -197,6 +169,33 @@ const Navbar = () => {
         </Hidden>
       </MiddleBox>
     </NavWrapper>
+  );
+};
+
+const NavbarItem = ({
+  path,
+  image,
+  name,
+}: {
+  path: string;
+  image: string;
+  name: string;
+}) => {
+  return (
+    <Link href={path}>
+      <a>
+        <CustomButton>
+          <Image
+            alt="me"
+            src={`/assets/images/${image}.png`}
+            height="20"
+            width="20"
+          />
+
+          <Typography>{name}</Typography>
+        </CustomButton>
+      </a>
+    </Link>
   );
 };
 
