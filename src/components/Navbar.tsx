@@ -2,15 +2,19 @@ import {
   Box,
   experimentalStyled,
   Hidden,
-  Menu,
   Tooltip,
   Typography,
 } from "@material-ui/core";
+import {
+  Delete,
+  OpenInNewTwoTone,
+  Menu,
+} from "@material-ui/icons";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
-const screenPadding = 255;
+export const screenPadding = 255;
 export const navHeight = 50;
 
 const NavWrapper = experimentalStyled(Box)(
@@ -108,9 +112,9 @@ const Navbar = () => {
   return (
     <NavWrapper>
       <Box display="flex" justifyContent="space-between" alignItems="center">
-        {/* <Hidden mdDown>
+        <Hidden mdDown>
           <Menu sx={{ height: "20px" }} />
-        </Hidden> */}
+        </Hidden>
         <Hidden xsDown>
           <Typography
             variant="h5"
@@ -119,20 +123,22 @@ const Navbar = () => {
               letterSpacing: "0.5px",
             }}
           >
-            Rupak Magar
+            <Link href="/">
+              <a>Rupak Magar</a>
+            </Link>
           </Typography>
         </Hidden>
       </Box>
       <MiddleBox>
-        <NavbarItem name="Articles" path="home" image="article" />
-        <NavbarItem name="Projects" path="home" image="project" />
-        <NavbarItem name="About me" path="home" image="about_me" />
+        <NavbarItem name="Articles" path="articles" image="article" />
+        <NavbarItem name="Projects" path="projects" image="project" />
+        <NavbarItem name="About me" path="about" image="about_me" />
       </MiddleBox>
       <MiddleBox>
         <Hidden smDown>
           <SocialIcon>
-            <Link href="/home">
-              <a>
+            {/* <Link href="/home"> */}
+              <a href="https://github.com/RUPAAK" target="_">
                 <Image
                   alt="me"
                   src="/assets/images/github.png"
@@ -140,11 +146,11 @@ const Navbar = () => {
                   width="64"
                 />
               </a>
-            </Link>
+            {/* </Link> */}
           </SocialIcon>
           <SocialIcon>
-            <Link href="/home">
-              <a>
+            {/* <Link href="/home"> */}
+              <a href="https://twitter.com/rupaakthapa" target="_">
                 <Image
                   alt="me"
                   src="/assets/images/twitter.png"
@@ -152,10 +158,10 @@ const Navbar = () => {
                   width="64"
                 />
               </a>
-            </Link>
+            {/* </Link> */}
           </SocialIcon>
           <SocialIcon>
-            <Link href="/home">
+            <Link href="/">
               <a>
                 <Image
                   alt="me"
