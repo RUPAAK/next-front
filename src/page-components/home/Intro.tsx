@@ -5,10 +5,10 @@ import {
   Grid,
   Typography,
   Button,
-} from "@material-ui/core";
+  experimentalStyled,
+} from "@mui/material";
 import React from "react";
 
-import { experimentalStyled, styled } from "@material-ui/core/styles";
 import Image from "next/image";
 import Link from "next/link";
 

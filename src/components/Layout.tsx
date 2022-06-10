@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { Box, experimentalStyled } from "@material-ui/core";
+import { Box, experimentalStyled } from "@mui/material";
 import Navbar, { screenPadding } from "./Navbar";
 
 const MainWrapper = experimentalStyled(Box)(

@@ -1,15 +1,6 @@
-import {
-  Box,
-  experimentalStyled,
-  Hidden,
-  Tooltip,
-  Typography,
-} from "@material-ui/core";
-import {
-  Delete,
-  OpenInNewTwoTone,
-  Menu,
-} from "@material-ui/icons";
+import { Menu } from "@mui/icons-material";
+
+import { Box, experimentalStyled, Hidden, Typography } from "@mui/material";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -138,26 +129,26 @@ const Navbar = () => {
         <Hidden smDown>
           <SocialIcon>
             {/* <Link href="/home"> */}
-              <a href="https://github.com/RUPAAK" target="_">
-                <Image
-                  alt="me"
-                  src="/assets/images/github.png"
-                  height="64"
-                  width="64"
-                />
-              </a>
+            <a href="https://github.com/RUPAAK" target="_">
+              <Image
+                alt="me"
+                src="/assets/images/github.png"
+                height="64"
+                width="64"
+              />
+            </a>
             {/* </Link> */}
           </SocialIcon>
           <SocialIcon>
             {/* <Link href="/home"> */}
-              <a href="https://twitter.com/rupaakthapa" target="_">
-                <Image
-                  alt="me"
-                  src="/assets/images/twitter.png"
-                  height="64"
-                  width="64"
-                />
-              </a>
+            <a href="https://twitter.com/rupaakthapa" target="_">
+              <Image
+                alt="me"
+                src="/assets/images/twitter.png"
+                height="64"
+                width="64"
+              />
+            </a>
             {/* </Link> */}
           </SocialIcon>
           <SocialIcon>
