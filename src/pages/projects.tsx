@@ -1,9 +1,59 @@
-import React from 'react'
+import React from "react";
+import { Box, Typography, Grid, experimentalStyled } from "@mui/material";
+import { projects } from "projects";
+import Project from "components/Project";
 
-const Projects = () => {
+const screenPadding = 255;
+
+const MainWrapper = experimentalStyled(Box)(
+  ({ theme }) => `
+    padding: 0.8rem ${screenPadding}px;
+      @media (max-width: ${theme.breakpoints.values.lg}px) {
+        padding: 0.8rem ${screenPadding / 1.5}px;
+      }
+      @media (max-width: 1000px) {
+        padding: 0.8rem  0;
+      }
+  `
+);
+
+const index = () => {
   return (
-    <div>OnProgress</div>
-  )
-}
+    <>
+      <Box
+          display="flex"
+          alignItems="center"
+          flexDirection="column"
+          maxWidth="xs"
+        >
+          <Typography variant="h1">Projects</Typography>
+          <Box py={2}>
+            <Typography variant="body2" textAlign="center">
+              Some of my project's source and demo cannot be provided due to
+              client privcy and such.
+            </Typography>
+          </Box>
+        </Box>
+        <Box maxWidth="xs" my={5}>
+          <Grid container spacing={4}>
+            {projects.map((pro) => {
+              return (
+                // <Grid item xs={4}>
+                //   Hello
+                // </Grid>
+                <Project
+                  title={pro.title}
+                  desc={pro.desc}
+                  source={pro.source}
+                  tags={pro.tags}
+                  demo={pro.demo}
+                />
+              );
+            })}
+          </Grid>
+        </Box>
+    </>
+  );
+};
 
-export default Projects
+export default index;
