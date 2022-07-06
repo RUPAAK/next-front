@@ -8,10 +8,13 @@ import {
   Typography,
   experimentalStyled,
 } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { FC, useEffect } from "react";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import Image from "next/image";
+import { GetStaticProps, GetServerSideProps, GetStaticPropsResult } from "next";
+import axios from "axios";
+import EachArticle from "components/EachArticle";
 
 const MainHeader = experimentalStyled(Box)(
   ({ theme }) => `
@@ -42,6 +45,11 @@ const CustomListItem = experimentalStyled(ListItem)(
       }
       `
 );
+
+// interface HomeProps {
+//   host: string;
+// }
+
 const Article = () => {
   return (
     <Box maxWidth="xs">
@@ -49,7 +57,7 @@ const Article = () => {
         <Typography variant="h3">Articles</Typography>
         <Typography variant="h4">
           {/* <Link to="/articles" style={{ textDecoration: "underline" }}> */}
-            View All
+          View All
           {/* </Link> */}
         </Typography>
       </MainHeader>
@@ -57,23 +65,11 @@ const Article = () => {
       {[1].length > 0 ? (
         <Box maxWidth="xs">
           <List>
-            {[1, 2, 3, 4].map((each, index) => {
-              //   const date = new Date(each.date);
-              return (
-                <CustomListItem disablePadding key={index}>
-                  <Box display="flex" alignItems="center">
-                    <ListItemIcon>
-                      <Image alt="aa" src={"/assets/images/github.png"} height="20" width="20" />
-                      {/* <ListImage src={each.logo} /> */}
-                    </ListItemIcon>
-                    <Typography sx={{ fontSize: "1rem" }}>
-                      Mongodb memory server database
-                    </Typography>
-                  </Box>
-                  {/* <Typography>{moment(date).format("MMM Do YY")}</Typography> */}
-                </CustomListItem>
-              );
-            })}
+            <Typography>In Progress...</Typography>
+            {/* {[1, 2, 3, 4].map((each, index) => {
+              // return <EachArticle />;
+              return <Typography>In Progress...</Typography>;
+            })} */}
           </List>
         </Box>
       ) : (
@@ -82,5 +78,18 @@ const Article = () => {
     </Box>
   );
 };
+
+// export const getServerSideProps = async () => {
+//   const res = await axios.get(
+//     "https://editor-blog-backend.herokuapp.com/api/v1/app/blogs"
+//   );
+
+//   return {
+//     props: {
+//       total: 0,
+//       blogs: [],
+//     },
+//   };
+// };
 
 export default Article;
