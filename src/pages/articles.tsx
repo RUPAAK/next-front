@@ -14,7 +14,7 @@ const Article = ({ total, blogs }: ArticleProps) => {
   return (
     <Box maxWidth="xs">
       {blogs.length > 0 &&
-        blogs.map((blog) => <DateArticle date="2020" blogs={blogs} />)}
+        blogs.map((blog, index) => <DateArticle key={index} date="2020" blogs={blogs} />)}
     </Box>
   );
 };

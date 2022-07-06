@@ -21,37 +21,38 @@ const index = () => {
   return (
     <>
       <Box
-          display="flex"
-          alignItems="center"
-          flexDirection="column"
-          maxWidth="xs"
-        >
-          <Typography variant="h1">Projects</Typography>
-          <Box py={2}>
-            <Typography variant="body2" textAlign="center">
-              Some of my project's source and demo cannot be provided due to
-              client privcy and such.
-            </Typography>
-          </Box>
+        display="flex"
+        alignItems="center"
+        flexDirection="column"
+        maxWidth="xs"
+      >
+        <Typography variant="h1">Projects</Typography>
+        <Box py={2}>
+          <Typography variant="body2" textAlign="center">
+            Some of my project's source and demo cannot be provided due to
+            client privcy and such.
+          </Typography>
         </Box>
-        <Box maxWidth="xs" my={5}>
-          <Grid container spacing={4}>
-            {projects.map((pro) => {
-              return (
-                // <Grid item xs={4}>
-                //   Hello
-                // </Grid>
-                <Project
-                  title={pro.title}
-                  desc={pro.desc}
-                  source={pro.source}
-                  tags={pro.tags}
-                  demo={pro.demo}
-                />
-              );
-            })}
-          </Grid>
-        </Box>
+      </Box>
+      <Box maxWidth="xs" my={5}>
+        <Grid container spacing={4}>
+          {projects.map((pro, index) => {
+            return (
+              // <Grid item xs={4}>
+              //   Hello
+              // </Grid>
+              <Project
+                key={index}
+                title={pro.title}
+                desc={pro.desc}
+                source={pro.source}
+                tags={pro.tags}
+                demo={pro.demo}
+              />
+            );
+          })}
+        </Grid>
+      </Box>
     </>
   );
 };

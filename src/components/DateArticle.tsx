@@ -15,8 +15,8 @@ const DateArticle: FC<DateArticleProps> = ({ date, blogs }) => {
       <Typography variant="h4">{date}</Typography>
       <Divider />
 
-      {blogs.map((blog) => (
-        <EachArticle blog={blog} />
+      {blogs.map((blog, index) => (
+        <EachArticle blog={blog} key={index} />
       ))}
     </Box>
   );

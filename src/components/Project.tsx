@@ -31,8 +31,8 @@ const Project: FC<ProjectProps> = ({ title, desc, tags, source, demo }) => {
         <Box my={2}>
           <Typography>{desc}</Typography>
         </Box>
-        {tags.map((each) => (
-          <Chip sx={{ margin: "0 5px" }} label={each} />
+        {tags.map((each, index) => (
+          <Chip key={index} sx={{ margin: "0 5px" }} label={each} />
         ))}
         <Box maxWidth="xs" display="flex" py={2} justifyContent="space-between">
           <Button
