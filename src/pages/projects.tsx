@@ -29,7 +29,7 @@ const index = () => {
         <Typography variant="h1">Projects</Typography>
         <Box py={2}>
           <Typography variant="body2" textAlign="center">
-            Some of my project's source and demo cannot be provided due to
+            Some of my project&apos;s source and demo cannot be provided due to
             client privcy and such.
           </Typography>
         </Box>
