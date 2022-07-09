@@ -54,7 +54,6 @@ const CustomListItem = experimentalStyled(ListItem)(
 // }
 
 const Article: FC<{ blogs: Blog[] }> = ({ blogs }) => {
-  console.log(blogs);
   return (
     <Box maxWidth="xs">
       <MainHeader maxWidth="xs">

@@ -16,10 +16,11 @@ const Article = ({ total, blogs }: ArticleProps) => {
     <Box maxWidth="xs">
       <Typography variant="h4">2022</Typography>
       <Divider />
-      {blogs.length > 0 &&
+      <Typography>In Progress...</Typography>
+      {/* {blogs.length > 0 &&
         blogs.map((blog, index) => (
           <DateArticle key={index} date="2020" blogs={blogs} />
-        ))}
+        ))} */}
     </Box>
   );
 };
