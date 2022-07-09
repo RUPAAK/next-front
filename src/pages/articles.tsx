@@ -2,10 +2,11 @@ import { GetStaticProps } from "next";
 import React from "react";
 import axios from "axios";
 import { AllBlogResponse, Blog } from "../types/blog";
-import { Container, Box } from "@mui/material";
+import { Container, Box, Divider, Typography } from "@mui/material";
 import DateArticle from "components/DateArticle";
+import { adminSerice } from "http/admin-service";
 
-type ArticleProps = {
+export type ArticleProps = {
   total: number;
   blogs: Blog[];
 };
@@ -13,17 +14,20 @@ type ArticleProps = {
 const Article = ({ total, blogs }: ArticleProps) => {
   return (
     <Box maxWidth="xs">
+      <Typography variant="h4">2022</Typography>
+      <Divider />
       {blogs.length > 0 &&
-        blogs.map((blog, index) => <DateArticle key={index} date="2020" blogs={blogs} />)}
+        blogs.map((blog, index) => (
+          <DateArticle key={index} date="2020" blogs={blogs} />
+        ))}
     </Box>
   );
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { data }: { data: AllBlogResponse | null } = await axios.get(
-    "https://editor-blog-backend.herokuapp.com/api/v1/app/blogs"
-  );
-  if (!data) {
+  const blogs = await adminSerice.getAllArticles();
+
+  if (!blogs) {
     console.log("hit");
     return {
       props: {
@@ -34,14 +38,10 @@ export const getStaticProps: GetStaticProps = async () => {
   }
   return {
     props: {
-      total: data.total,
-      blogs: data.data,
+      total: blogs.total,
+      blogs: blogs.data,
     },
   };
-
-  // return {
-  //   props: {},
-  // };
 };
 
 export default Article;

@@ -45,7 +45,7 @@ const EachArticle: FC<{ blog: Blog }> = ({ blog }) => {
         </ListItemIcon>
         <Typography sx={{ fontSize: "1rem" }}>{blog.title}</Typography>
       </Box>
-      {/* <Typography>{moment(date).format("MMM Do YY")}</Typography> */}
+      <Typography>{moment(blog.createdAt).format("MMM Do YY")}</Typography>
     </CustomListItem>
   );
 };

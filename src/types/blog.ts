@@ -4,6 +4,7 @@ export type Blog = {
   logo?: string;
   tags?: string[];
   date: number;
+  createdAt: string;
 };
 
 export type AllBlogResponse = {

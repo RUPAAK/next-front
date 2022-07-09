@@ -12,8 +12,7 @@ type DateArticleProps = {
 const DateArticle: FC<DateArticleProps> = ({ date, blogs }) => {
   return (
     <Box maxWidth="xs">
-      <Typography variant="h4">{date}</Typography>
-      <Divider />
+   
 
       {blogs.map((blog, index) => (
         <EachArticle blog={blog} key={index} />

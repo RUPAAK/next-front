@@ -15,6 +15,9 @@ import Image from "next/image";
 import { GetStaticProps, GetServerSideProps, GetStaticPropsResult } from "next";
 import axios from "axios";
 import EachArticle from "components/EachArticle";
+import { adminSerice } from "http/admin-service";
+import { ArticleProps } from "pages/articles";
+import { AllBlogResponse, Blog } from "types/blog";
 
 const MainHeader = experimentalStyled(Box)(
   ({ theme }) => `
@@ -50,11 +53,12 @@ const CustomListItem = experimentalStyled(ListItem)(
 //   host: string;
 // }
 
-const Article = () => {
+const Article: FC<{ blogs: Blog[] }> = ({ blogs }) => {
+  console.log(blogs);
   return (
     <Box maxWidth="xs">
       <MainHeader maxWidth="xs">
-        <Typography variant="h3">Articles</Typography>
+        <Typography variant="h3">Latest Articles</Typography>
         <Typography variant="h4">
           {/* <Link to="/articles" style={{ textDecoration: "underline" }}> */}
           View All
@@ -62,14 +66,12 @@ const Article = () => {
         </Typography>
       </MainHeader>
       <Divider sx={{ height: "1px", background: "grey" }} />
-      {[1].length > 0 ? (
+      {blogs.length > 0 ? (
         <Box maxWidth="xs">
           <List>
-            <Typography>In Progress...</Typography>
-            {/* {[1, 2, 3, 4].map((each, index) => {
-              // return <EachArticle />;
-              return <Typography>In Progress...</Typography>;
-            })} */}
+            {blogs.map((blog) => (
+              <EachArticle blog={blog} />
+            ))}
           </List>
         </Box>
       ) : (
@@ -78,18 +80,5 @@ const Article = () => {
     </Box>
   );
 };
-
-// export const getServerSideProps = async () => {
-//   const res = await axios.get(
-//     "https://editor-blog-backend.herokuapp.com/api/v1/app/blogs"
-//   );
-
-//   return {
-//     props: {
-//       total: 0,
-//       blogs: [],
-//     },
-//   };
-// };
 
 export default Article;
