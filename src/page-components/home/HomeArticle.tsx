@@ -68,8 +68,8 @@ const Article: FC<{ blogs: Blog[] }> = ({ blogs }) => {
       {blogs.length > 0 ? (
         <Box maxWidth="xs">
           <List>
-            {blogs.map((blog) => (
-              <Link href={`/articles/${blog.id}`}>
+            {blogs.map((blog, index) => (
+              <Link href={`/articles/${blog.id}`} key={index}>
                 <a>
                   {" "}
                   <EachArticle blog={blog} />
