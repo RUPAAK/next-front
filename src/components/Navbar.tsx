@@ -121,9 +121,9 @@ const Navbar = () => {
         </Hidden>
       </Box>
       <MiddleBox>
-        <NavbarItem name="Articles" path="articles" image="article" />
-        <NavbarItem name="Projects" path="projects" image="project" />
-        <NavbarItem name="About me" path="about" image="about_me" />
+        <NavbarItem name="Articles" path="/articles" image="article" />
+        <NavbarItem name="Projects" path="/projects" image="project" />
+        <NavbarItem name="About me" path="/about" image="about_me" />
       </MiddleBox>
       <MiddleBox>
         <Hidden smDown>
