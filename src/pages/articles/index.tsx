@@ -12,18 +12,17 @@ export type ArticleProps = {
 };
 
 const Article = ({ total, blogs }: ArticleProps) => {
-  return <h1>Hello</h1>
-  // return (
-  //   <Box maxWidth="xs">
-  //     <Typography variant="h4">2022</Typography>
-  //     <Divider />
-  //     <Typography>In Progress...</Typography>
-  //     {/* {blogs.length > 0 &&
-  //       blogs.map((blog, index) => (
-  //         <DateArticle key={index} date="2020" blogs={blogs} />
-  //       ))} */}
-  //   </Box>
-  // );
+  return (
+    <Box maxWidth="xs">
+      <Typography variant="h4">2022</Typography>
+      <Divider />
+      <Typography>In Progress...</Typography>
+      {/* {blogs.length > 0 &&
+        blogs.map((blog, index) => (
+          <DateArticle key={index} date="2020" blogs={blogs} />
+        ))} */}
+    </Box>
+  );
 };
 
 // export const getServerSideProps: GetServerSideProps = async () => {

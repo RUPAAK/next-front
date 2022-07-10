@@ -12,7 +12,7 @@ const Home: NextPage<{ blogs: Blog[] }> = ({ blogs }) => {
   return (
     <>
       <Intro />
-      {/* <HomeArticle blogs={blogs} /> */}
+      <HomeArticle blogs={blogs} />
     </>
   );
 };
@@ -38,22 +38,24 @@ const Home: NextPage<{ blogs: Blog[] }> = ({ blogs }) => {
 // };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  // const blogs = await adminSerice.getAllArticles();
+  const blogs = await adminSerice.getAllArticles();
 
-  // if (!blogs) {
+  if (!blogs) {
+    console.log("hit");
     return {
       props: {
         total: 0,
         blogs: [],
       },
     };
-  // }
-  // return {
-  //   props: {
-  //     total: blogs.total,
-  //     blogs: blogs.data,
-  //   },
-  // };
+  }
+  return {
+    props: {
+      total: blogs.total,
+      blogs: blogs.data,
+    },
+  };
 };
+
 
 export default Home;
