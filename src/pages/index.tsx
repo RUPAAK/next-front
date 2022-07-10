@@ -38,7 +38,7 @@ const Home: NextPage<{ blogs: Blog[] }> = ({ blogs }) => {
 // };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const blogs = await adminSerice.getAllArticles(8);
+  const blogs = await adminSerice.getAllArticles();
 
   if (!blogs) {
     return {

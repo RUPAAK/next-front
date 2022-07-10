@@ -9,7 +9,6 @@ import {
   experimentalStyled,
 } from "@mui/material";
 import React, { FC, useEffect } from "react";
-import { Link } from "react-router-dom";
 import moment from "moment";
 import Image from "next/image";
 import { GetStaticProps, GetServerSideProps, GetStaticPropsResult } from "next";
@@ -18,6 +17,7 @@ import EachArticle from "components/EachArticle";
 import { adminSerice } from "http/admin-service";
 import { ArticleProps } from "pages/articles";
 import { AllBlogResponse, Blog } from "types/blog";
+import Link from "next/link";
 
 const MainHeader = experimentalStyled(Box)(
   ({ theme }) => `
@@ -69,7 +69,12 @@ const Article: FC<{ blogs: Blog[] }> = ({ blogs }) => {
         <Box maxWidth="xs">
           <List>
             {blogs.map((blog) => (
-              <EachArticle blog={blog} />
+              <Link href={`/articles/${blog.id}`}>
+                <a>
+                  {" "}
+                  <EachArticle blog={blog} />
+                </a>
+              </Link>
             ))}
           </List>
         </Box>

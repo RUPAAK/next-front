@@ -1,4 +1,4 @@
-import { AllBlogResponse } from "types/blog";
+import { AllBlogResponse, BlogResponse } from "types/blog";
 import { api } from "./api";
 
 export const adminSerice = {
@@ -11,6 +11,14 @@ export const adminSerice = {
         const response: AllBlogResponse = await api.get("/app/blogs");
         return response;
       }
+    } catch (error) {
+      return null;
+    }
+  },
+  getDetailArticle: async (id: string): Promise<BlogResponse | null> => {
+    try {
+      const response: BlogResponse = await api.get(`/app/blogs/${id}`);
+      return response;
     } catch (error) {
       return null;
     }

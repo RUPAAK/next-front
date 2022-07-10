@@ -1,10 +1,10 @@
-import { GetStaticProps } from "next";
+import { GetServerSideProps, GetStaticProps } from "next";
 import React from "react";
 import axios from "axios";
-import { AllBlogResponse, Blog } from "../types/blog";
 import { Container, Box, Divider, Typography } from "@mui/material";
 import DateArticle from "components/DateArticle";
 import { adminSerice } from "http/admin-service";
+import { Blog } from "types/blog";
 
 export type ArticleProps = {
   total: number;
@@ -25,7 +25,7 @@ const Article = ({ total, blogs }: ArticleProps) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const blogs = await adminSerice.getAllArticles();
 
   if (!blogs) {

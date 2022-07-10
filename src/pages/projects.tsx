@@ -35,8 +35,7 @@ const index = () => {
         </Box>
       </Box>
       <Box maxWidth="xs" my={5}>
-        <Typography>In Progress..</Typography>
-        {/* <Grid container spacing={4}>
+        <Grid container spacing={4}>
           {projects.map((pro, index) => {
             return (
               // <Grid item xs={4}>
@@ -52,7 +51,7 @@ const index = () => {
               />
             );
           })}
-        </Grid> */}
+        </Grid>
       </Box>
     </>
   );

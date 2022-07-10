@@ -1,4 +1,5 @@
 export type Blog = {
+  id: string;
   title: string;
   desc: string;
   logo?: string;
@@ -10,4 +11,8 @@ export type Blog = {
 export type AllBlogResponse = {
   total: number;
   data: Blog[];
+};
+
+export type BlogResponse = {
+  data: Blog;
 };
