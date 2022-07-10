@@ -12,7 +12,7 @@ const Home: NextPage<{ blogs: Blog[] }> = ({ blogs }) => {
   return (
     <>
       <Intro />
-      <HomeArticle blogs={blogs} />
+      {/* <HomeArticle blogs={blogs} /> */}
     </>
   );
 };
