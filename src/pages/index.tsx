@@ -29,7 +29,6 @@ export const getStaticProps: GetStaticProps = async () => {
   const client = new QueryClient();
 
   await client.prefetchQuery('blogs', getBlogs)
-  // const blogs = await adminSerice.getAllArticles();
 
 return {
   props: {
