@@ -15,7 +15,6 @@ const getBlogs = async () => await adminSerice.getAllArticles();
 const Home: NextPage<{ blogs?: Blog[] }> = ({ blogs }) => {
   const { data, isLoading, isFetching } = useQuery("blogs", getBlogs);
 
-  console.log(data);
   return (
     <>
       <Intro />
