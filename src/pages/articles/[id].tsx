@@ -28,7 +28,7 @@ const ArticleDetail: NextPage<{ blog: Blog | null }> = ({ blog }) => {
   const router = useRouter();
   const id = router.query.id as unknown as string;
 
-  const { data, isLoading, isFetching } = useQuery(["blog"], () =>
+  const { data, isLoading, isFetching } = useQuery(["blog", id], () =>
     getDetailBlog(id)
   );
 
