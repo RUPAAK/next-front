@@ -103,9 +103,9 @@ const Navbar = () => {
   return (
     <NavWrapper>
       <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Hidden mdDown>
+        {/* <Hidden mdDown>
           <Menu sx={{ height: "20px" }} />
-        </Hidden>
+        </Hidden> */}
         <Hidden xsDown>
           <Typography
             variant="h5"
