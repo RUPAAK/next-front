@@ -10,7 +10,12 @@ import { dehydrate, QueryClient, useQuery } from "react-query";
 import { AllBlogResponse, Blog } from "types/blog";
 import styles from "../styles/Home.module.css";
 
-const getBlogs = async () => await adminSerice.getAllArticles();
+const config = {
+  "pagination[page]": 1,
+  "pagination[pageSize]": 10,
+};
+
+const getBlogs = async () => await adminSerice.getStripe(config);
 
 const Home: NextPage<{ blogs?: Blog[] }> = ({ blogs }) => {
   const { data, isLoading, isFetching } = useQuery("blogs", getBlogs);
@@ -18,58 +23,21 @@ const Home: NextPage<{ blogs?: Blog[] }> = ({ blogs }) => {
   return (
     <>
       <Intro />
-      {data && <HomeArticle blogs={data.data!} />}
+      {data && <HomeArticle articles={data.data} />}
     </>
   );
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-
   const client = new QueryClient();
 
-  await client.prefetchQuery('blogs', getBlogs)
+  await client.prefetchQuery("blogs", getBlogs);
 
-return {
-  props: {
-    dehydratedState: dehydrate(client)
-  }
-}
-
-  // if (!blogs) {
-  //   console.log("hit");
-  //   return {
-  //     props: {
-  //       total: 0,
-  //       blogs: [],
-  //     },
-  //   };
-  // }
-  // return {
-  //   props: {
-  //     total: blogs.total,
-  //     blogs: blogs.data,
-  //   },
-  // };
+  return {
+    props: {
+      dehydratedState: dehydrate(client),
+    },
+  };
 };
-
-// export const getServerSideProps: GetServerSideProps = async () => {
-//   const blogs = await adminSerice.getAllArticles();
-
-//   if (!blogs) {
-//     console.log("hit");
-//     return {
-//       props: {
-//         total: 0,
-//         blogs: [],
-//       },
-//     };
-//   }
-//   return {
-//     props: {
-//       total: blogs.total,
-//       blogs: blogs.data,
-//     },
-//   };
-// };
 
 export default Home;

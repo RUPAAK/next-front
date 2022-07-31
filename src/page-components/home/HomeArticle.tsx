@@ -16,7 +16,7 @@ import axios from "axios";
 import EachArticle from "components/EachArticle";
 import { adminSerice } from "http/admin-service";
 import { ArticleProps } from "pages/articles";
-import { AllBlogResponse, Blog } from "types/blog";
+import { AllBlogResponse, Blog, StrapiArticle } from "types/blog";
 import Link from "next/link";
 
 const MainHeader = experimentalStyled(Box)(
@@ -53,7 +53,7 @@ const CustomListItem = experimentalStyled(ListItem)(
 //   host: string;
 // }
 
-const Article: FC<{ blogs: Blog[] }> = ({ blogs }) => {
+const Article: FC<{ articles: StrapiArticle[] }> = ({ articles }) => {
   return (
     <Box maxWidth="xs">
       <MainHeader maxWidth="xs">
@@ -65,14 +65,13 @@ const Article: FC<{ blogs: Blog[] }> = ({ blogs }) => {
         </Typography>
       </MainHeader>
       <Divider sx={{ height: "1px", background: "grey" }} />
-      {blogs.length > 0 ? (
+      {articles.length > 0 ? (
         <Box maxWidth="xs">
           <List>
-            {blogs.map((blog, index) => (
-              <Link href={`/articles/${blog.id}`} key={index}>
+            {articles.map((article, index) => (
+              <Link href={`/articles/${article.attributes.slug}`} key={index}>
                 <a>
-                  {" "}
-                  <EachArticle blog={blog} />
+                  <EachArticle article={article} />
                 </a>
               </Link>
             ))}

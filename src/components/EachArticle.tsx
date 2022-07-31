@@ -14,7 +14,7 @@ import moment from "moment";
 import Image from "next/image";
 import { GetStaticProps, GetServerSideProps, GetStaticPropsResult } from "next";
 import axios from "axios";
-import { Blog } from "types/blog";
+import { Blog, StrapiArticle } from "types/blog";
 
 const CustomListItem = experimentalStyled(ListItem)(
   ({ theme }) => `
@@ -29,23 +29,31 @@ const CustomListItem = experimentalStyled(ListItem)(
         }
         `
 );
-const EachArticle: FC<{ blog: Blog }> = ({ blog }) => {
+const EachArticle: FC<{ article: StrapiArticle }> = ({ article }) => {
   return (
     <CustomListItem disablePadding>
       <Box display="flex" alignItems="center">
         <ListItemIcon>
-          <Image
+          <img
+            style={{ height: 30, width: 30, borderRadius: '50%' }}
+            src={article.attributes.logo}
+          />
+          {/* <Image
             alt="aa"
-            src={blog.logo!}
+            src={article.logo!}
             // src={blog.logo ?? "/assets/images/github.png"}
             height="25"
             width="25"
-          />
+          /> */}
           {/* <ListImage src={each.logo} /> */}
         </ListItemIcon>
-        <Typography sx={{ fontSize: "1rem" }}>{blog.title}</Typography>
+        <Typography sx={{ fontSize: "1rem" }}>
+          {article.attributes.title}
+        </Typography>
       </Box>
-      <Typography>{moment(blog.createdAt).format("MMM Do YY")}</Typography>
+      <Typography>
+        {moment(article.attributes.createdAt).format("MMM Do YY")}
+      </Typography>
     </CustomListItem>
   );
 };

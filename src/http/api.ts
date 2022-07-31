@@ -16,14 +16,10 @@ api.defaults.headers.post["Content-Type"] = "application/json";
 // api.defaults.withCredentials = true;
 
 api.interceptors.request.use((config) => {
-  // const accessToken = getCookie("accessToken")
-  // ? getCookie("accessToken")![1]
-  // : null;
-  // console.log(accessToken)
-  // alert(accessToken)
-  // console.log(accessToken);
-  //   const accessToken = localStorage.getItem("accessToken");
-  //   config.headers.Authorization = `Bearer ${accessToken}`;
+  const accessToken =
+    "fdafdb28c048b8e177a487c5179dada62a7ea42e4e9a797c3af1784bfd92be1672cfd45a828a9d2440ffa4deb01159e741ad4ba36ccff8fcc580c58409bc50ac7ac08a9f9a65c0e834b3a8f730523a40b4fb8e4b4431f9e84667ebf9b7a785ce7352f4ab2f97ea536dc633440de9d341a73201c6ffaf0ec581f72f6f9443c012";
+
+  config!.headers!.Authorization = `Bearer ${accessToken}`;
   return config;
 });
 
