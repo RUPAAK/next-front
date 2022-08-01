@@ -4,6 +4,7 @@ import {
   BlogResponse,
   DataResponse,
   StrapiArticle,
+  StrapiAttrs,
 } from "types/blog";
 import { api } from "./api";
 
@@ -22,18 +23,29 @@ export const adminSerice = {
     }
   },
 
-  getStripe: async (config: {
-    [key: string]: any;
-  }): Promise<DataResponse<StrapiArticle> | null> => {
-    const queryValues = Object.values(config);
-
-    const query = Object.keys(config).map(
-      (element, ind) => `${element}=${queryValues[ind]}`
-    ).join("&");
-
+  getStripe: async (
+    config: string
+  ): Promise<DataResponse<StrapiArticle> | null> => {
     try {
       const response: DataResponse<StrapiArticle> = await api.get(
-        `/articles?${query}&populate=*`
+        `/articles?${config}&populate=*`
+      );
+      return response;
+    } catch (error) {
+      return null;
+    }
+  },
+
+  getSingleStripe: async ({
+    slug,
+    config,
+  }: {
+    slug: Pick<StrapiAttrs, "slug">;
+    config: string;
+  }): Promise<DataResponse<StrapiArticle> | null> => {
+    try {
+      const response: DataResponse<StrapiArticle> = await api.get(
+        `/articles?filters[slug][$eq]=${slug}`
       );
       return response;
     } catch (error) {

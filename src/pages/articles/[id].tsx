@@ -5,7 +5,9 @@ import { GetServerSideProps, GetServerSidePropsContext, NextPage } from "next";
 import { useRouter } from "next/router";
 import React from "react";
 import { dehydrate, QueryClient, useQuery } from "react-query";
-import { Blog, BlogResponse } from "types/blog";
+import { Blog, BlogResponse, StrapiArticle, StrapiAttrs } from "types/blog";
+
+// articles?filters[slug][$eq]=git-for-beginner&populate=logo
 
 const screenPadding = 255;
 
@@ -21,19 +23,24 @@ const MainWrapper = experimentalStyled(Box)(
   `
 );
 
-const getDetailBlog = async (id: string) =>
-  await adminSerice.getDetailArticle(id);
+const config = "";
+const getDetailBlog = async (slug: Pick<StrapiAttrs, "slug">) =>
+  await adminSerice.getSingleStripe({ slug, config });
 
 const ArticleDetail: NextPage<{ blog: Blog | null }> = ({ blog }) => {
   const router = useRouter();
-  const id = router.query.id as unknown as string;
+  const id = router.query.id as unknown as Pick<StrapiAttrs, "slug">;
 
   const { data, isLoading, isFetching } = useQuery(["blog", id], () =>
     getDetailBlog(id)
   );
 
   return (
-    <MainWrapper>{data != null && <Single blog={data!.data} />}</MainWrapper>
+    <MainWrapper>
+      {data != null && data.data.length > 0 && (
+        <Single article={data!.data[0]} />
+      )}
+    </MainWrapper>
   );
 };
 
@@ -42,30 +49,15 @@ export default ArticleDetail;
 export const getServerSideProps: GetServerSideProps = async (
   ctx: GetServerSidePropsContext
 ) => {
-  const id = ctx.params!.id as string;
+  const slug = ctx.params!.id as unknown as Pick<StrapiAttrs, "slug">;
 
   const client = new QueryClient();
 
-  await client.prefetchQuery("blogs", () => getDetailBlog(id));
+  await client.prefetchQuery("blogs", () => getDetailBlog(slug));
 
   return {
     props: {
       dehydratedState: dehydrate(client),
     },
   };
-
-  // const blog = await adminSerice.getDetailArticle(id as string);
-  // if (!blog) {
-  //   return {
-  //     props: {
-  //       blog: null,
-  //     },
-  //   };
-  // }
-
-  // return {
-  //   props: {
-  //     blog: blog.data,
-  //   },
-  // };
 };

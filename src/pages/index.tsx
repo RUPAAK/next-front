@@ -10,10 +10,7 @@ import { dehydrate, QueryClient, useQuery } from "react-query";
 import { AllBlogResponse, Blog } from "types/blog";
 import styles from "../styles/Home.module.css";
 
-const config = {
-  "pagination[page]": 1,
-  "pagination[pageSize]": 10,
-};
+const config = "pagination[page]=1&pagination[pageSize]=10";
 
 const getBlogs = async () => await adminSerice.getStripe(config);
 

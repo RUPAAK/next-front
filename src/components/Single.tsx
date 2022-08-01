@@ -8,7 +8,7 @@ import {
   experimentalStyled,
   Typography,
 } from "@mui/material";
-import { Blog } from "types/blog";
+import { Blog, StrapiArticle } from "types/blog";
 import { screenPadding } from "./Navbar";
 import Link from "next/link";
 
@@ -93,7 +93,7 @@ const ContentBox = experimentalStyled(Box)(
 `
 );
 
-const Single: FC<{ blog: Blog }> = ({ blog }) => {
+const Single: FC<{ article: StrapiArticle }> = ({ article }) => {
   return (
     <>
       <Link href="/">
@@ -108,15 +108,15 @@ const Single: FC<{ blog: Blog }> = ({ blog }) => {
         alignItems="center"
         flexDirection="column"
       >
-        <Image src={blog.logo} />
+        <Image src={article.attributes.logo} />
         <Typography>
           Written by Rupak Thapa Magar on{" "}
-          {moment(blog.date).format("MMM Do YYYY")}
+          {moment(article.attributes.createdAt).format("MMM Do YYYY")}
         </Typography>
         <Typography variant="h1" textAlign="center">
-          {blog.title}
+          {article.attributes.title}
         </Typography>
-        <Box>
+        {/* <Box>
           {blog.tags &&
             blog.tags.map((each, index) => (
               <Chip
@@ -126,7 +126,7 @@ const Single: FC<{ blog: Blog }> = ({ blog }) => {
                 sx={{ margin: "0 0.3rem" }}
               />
             ))}
-        </Box>
+        </Box> */}
         <ContentBox
           sx={{
             fontSize: {
@@ -137,7 +137,7 @@ const Single: FC<{ blog: Blog }> = ({ blog }) => {
           }}
           maxWidth="xs"
         >
-          {parse(blog.desc)}
+          {parse(article.attributes.body)}
         </ContentBox>
       </HeaderBox>
     </>
