@@ -4,7 +4,7 @@ import { adminSerice } from "http/admin-service";
 import { GetServerSideProps, GetServerSidePropsContext, NextPage } from "next";
 import { useRouter } from "next/router";
 import React from "react";
-import { dehydrate, QueryClient, useQuery } from "react-query";
+import { dehydrate, QueryClient, useQuery } from "@tanstack/react-query";
 import { Blog, BlogResponse, StrapiArticle, StrapiAttrs } from "types/blog";
 
 // articles?filters[slug][$eq]=git-for-beginner&populate=logo
@@ -53,7 +53,7 @@ export const getServerSideProps: GetServerSideProps = async (
 
   const client = new QueryClient();
 
-  await client.prefetchQuery("blogs", () => getDetailBlog(slug));
+  await client.prefetchQuery(["staticBlog"], () => getDetailBlog(slug));
 
   return {
     props: {
