@@ -53,7 +53,7 @@ export const getServerSideProps: GetServerSideProps = async (
 
   const client = new QueryClient();
 
-  await client.prefetchQuery(["staticBlog"], () => getDetailBlog(slug));
+  await client.prefetchQuery(["blog"], () => getDetailBlog(slug));
 
   return {
     props: {
