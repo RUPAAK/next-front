@@ -59,9 +59,9 @@ const Article: FC<{ articles: StrapiArticle[] }> = ({ articles }) => {
       <MainHeader maxWidth="xs">
         <Typography variant="h3">Latest Articles</Typography>
         <Typography variant="h4">
-          {/* <Link to="/articles" style={{ textDecoration: "underline" }}> */}
-          View All
-          {/* </Link> */}
+          <Link href="/articles" style={{ textDecoration: "underline" }}>
+            <a>View All</a>
+          </Link>
         </Typography>
       </MainHeader>
       <Divider sx={{ height: "1px", background: "grey" }} />

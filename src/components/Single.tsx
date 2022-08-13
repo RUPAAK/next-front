@@ -11,6 +11,9 @@ import {
 import { Blog, StrapiArticle } from "types/blog";
 import { screenPadding } from "./Navbar";
 import Link from "next/link";
+import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
+import { serializeMark } from "utils/serialize";
+import { ArrowBack, ArrowBackIos } from "@mui/icons-material";
 
 const Image = experimentalStyled("img")(
   ({ theme }) => `
@@ -25,6 +28,12 @@ const IconButton = experimentalStyled(Button)(
   ({ theme }) => `
   position: absolute;
   left: 100px;
+  
+  // &:hover {
+  //   padding: 50px;
+  //   background: red;
+  //   // display: none;
+  // }
   `
 );
 
@@ -98,7 +107,9 @@ const Single: FC<{ article: StrapiArticle }> = ({ article }) => {
     <>
       <Link href="/">
         <a>
-          <IconButton variant="contained">Go Back</IconButton>
+          <IconButton variant="contained">
+            <ArrowBackIos />
+          </IconButton>
         </a>
       </Link>
       <HeaderBox
@@ -116,17 +127,19 @@ const Single: FC<{ article: StrapiArticle }> = ({ article }) => {
         <Typography variant="h1" textAlign="center">
           {article.attributes.title}
         </Typography>
-        {/* <Box>
-          {blog.tags &&
-            blog.tags.map((each, index) => (
-              <Chip
-                key={index}
-                label={each}
-                color="primary"
-                sx={{ margin: "0 0.3rem" }}
-              />
-            ))}
-        </Box> */}
+        <Box>
+          {article.attributes.tags.length > 0 &&
+            article.attributes.tags
+              .split(",")
+              .map((each, index) => (
+                <Chip
+                  key={index}
+                  label={each}
+                  color="primary"
+                  sx={{ margin: "0 0.3rem" }}
+                />
+              ))}
+        </Box>
         <ContentBox
           sx={{
             fontSize: {
@@ -137,7 +150,11 @@ const Single: FC<{ article: StrapiArticle }> = ({ article }) => {
           }}
           maxWidth="xs"
         >
-          {parse(article.attributes.body)}
+          <MDXRemote
+            {...(article.attributes
+              .body as unknown as MDXRemoteSerializeResult)}
+          />
+          {/* {parse(article.attributes.body)} */}
         </ContentBox>
       </HeaderBox>
     </>
