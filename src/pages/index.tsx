@@ -11,7 +11,7 @@ import { AllBlogResponse, Blog } from "types/blog";
 import styles from "../styles/Home.module.css";
 import { Box, CircularProgress } from "@mui/material";
 
-const config = "pagination[page]=1&pagination[pageSize]=10";
+const config = "pagination[page]=1&pagination[pageSize]=10&sort=createdAt%3Adesc";
 
 const getBlogs = async () => await adminSerice.getStripe(config);
 
