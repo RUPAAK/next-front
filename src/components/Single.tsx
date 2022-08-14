@@ -103,6 +103,9 @@ const ContentBox = experimentalStyled(Box)(
 );
 
 const Single: FC<{ article: StrapiArticle }> = ({ article }) => {
+
+
+
   return (
     <>
       <Link href="/">
@@ -154,7 +157,6 @@ const Single: FC<{ article: StrapiArticle }> = ({ article }) => {
             {...(article.attributes
               .body as unknown as MDXRemoteSerializeResult)}
           />
-          {/* {parse(article.attributes.body)} */}
         </ContentBox>
       </HeaderBox>
     </>

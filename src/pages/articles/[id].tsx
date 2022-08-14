@@ -1,9 +1,15 @@
 import { Box, experimentalStyled } from "@mui/material";
 import Single from "components/Single";
 import { adminSerice } from "http/admin-service";
-import { GetServerSideProps, GetServerSidePropsContext, NextPage } from "next";
+import {
+  GetServerSideProps,
+  GetServerSidePropsContext,
+  GetStaticPaths,
+  GetStaticPropsContext,
+  NextPage,
+} from "next";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { serialize } from "next-mdx-remote/serialize";
 import { MDXRemote } from "next-mdx-remote";
 import { dehydrate, QueryClient, useQuery } from "@tanstack/react-query";
@@ -27,46 +33,55 @@ const MainWrapper = experimentalStyled(Box)(
 );
 
 const config = "";
-const getDetailBlog = async (slug: Pick<StrapiAttrs, "slug">) =>
-  await adminSerice.getSingleStripe({ slug, config });
 
 const ArticleDetail: NextPage<{ article: StrapiArticle | null }> = ({
   article,
 }) => {
-  return <MainWrapper>{article && <Single article={article} />}</MainWrapper>;
+  const [articleState, setArticleState] = useState<StrapiArticle>();
+  const router = useRouter();
+  const id = router.query.id as unknown as Pick<StrapiAttrs, "slug">;
+
+  const getDetailBlog = async (slug: Pick<StrapiAttrs, "slug">) => {
+    {
+      const response = await adminSerice.getSingleStripe({ slug, config });
+      if (response?.data[0] != articleState) {
+        response!.data[0].attributes.body = (await serializeMark(
+          response!.data[0].attributes.body
+        )) as any;
+        setArticleState(response!.data[0]);
+      }
+    }
+  };
+
+  useEffect(() => {
+    getDetailBlog(id);
+  }, [id]);
+  // const { data, isLoading, isFetching } = useQuery(["blog", id], () =>
+  //     getDetailBlog(id)
+  // );
+  // console.log(data)
+
+  return (
+    <MainWrapper>
+      {articleState && <Single article={articleState!} />}
+    </MainWrapper>
+  );
 };
 
 export default ArticleDetail;
 
-export const getServerSideProps: GetServerSideProps = async (
-  ctx: GetServerSidePropsContext
-) => {
-  const slug = ctx.params!.id as unknown as Pick<StrapiAttrs, "slug">;
+// export const getServerSideProps: GetServerSideProps = async (
+//   ctx: GetServerSidePropsContext
+// ) => {
+//   const slug = ctx.params!.id as unknown as Pick<StrapiAttrs, "slug">;
 
-  const getDetailBlog = async (slug: Pick<StrapiAttrs, "slug">) =>
-    await adminSerice.getSingleStripe({ slug, config });
+//   const client = new QueryClient();
 
-  const data = await getDetailBlog(slug);
+//   await client.prefetchQuery(["blog"], () => getDetailBlog(slug));
 
-  if (data && data.data.length > 0) {
-    const markDo = await serializeMark(data.data[0].attributes.body);
-
-    return {
-      props: {
-        article: {
-          ...data.data[0],
-          attributes: {
-            ...data.data[0].attributes,
-            body: markDo,
-          },
-        },
-      },
-    };
-  }
-
-  return {
-    props: {
-      article: null,
-    },
-  };
-};
+//   return {
+//     props: {
+//       dehydratedState: dehydrate(client),
+//     },
+//   };
+// };
