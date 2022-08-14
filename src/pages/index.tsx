@@ -9,6 +9,7 @@ import { dehydrate, QueryClient, useQuery } from "@tanstack/react-query";
 
 import { AllBlogResponse, Blog } from "types/blog";
 import styles from "../styles/Home.module.css";
+import { Box, CircularProgress } from "@mui/material";
 
 const config = "pagination[page]=1&pagination[pageSize]=10";
 
@@ -20,7 +21,14 @@ const Home: NextPage<{ blogs?: Blog[] }> = ({ blogs }) => {
   return (
     <>
       <Intro />
-      {data && <HomeArticle articles={data.data} />}
+      {isLoading ? (
+        "Loading Articles"
+      ) : // <CircularProgress />
+      data ? (
+        <HomeArticle articles={data.data} />
+      ) : (
+        "Failed to get blogs"
+      )}
     </>
   );
 };
@@ -35,7 +43,7 @@ export const getStaticProps: GetStaticProps = async () => {
       dehydratedState: dehydrate(client),
     },
 
-    revalidate: 10
+    revalidate: 10,
   };
 };
 
